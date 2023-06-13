@@ -1,3 +1,10 @@
+######################################################
+# Sales Prediction with Linear Regression
+######################################################
+
+# I have developed a sales forecasting model. This model indicates the amount of sales obtained as a result of advertising expenses made on various channels.
+# My first task is to build a simple regression model with two variables, and then proceed to build a model with all five variables present in the dataset.
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -161,28 +168,24 @@ def update_weights(Y, b, w, X, learning_rate):
     new_w = w - (learning_rate * 1 / m * w_deriv_sum)
     return new_b, new_w
 
-def train(Y, initial_b, initial_w, X, learning_rate, num_iters):            # initial_b \ initial_w:çalışmanın başında verecek olduğumuz ilk ağırlıklar / numb_iters:iterasyon sayısı
-    # train başlamadan önce çalışmanın başında cost fonksiyonuna argümanları girdik ve bunu bana raporla diyoruz.
-    # Starting gradient descent:gradient descent'in başladığı nokta / b = {0}, w = {1}:ağırlıkların ilk değerleri / mse = {2}:bu ağırlıklara karşılık ilk ortalama hata
+def train(Y, initial_b, initial_w, X, learning_rate, num_iters):     
     print("Starting gradient descent at b = {0}, w = {1}, mse = {2}".format(initial_b, initial_w,
                                                                    cost_function(Y, initial_b, initial_w, X)))
 
-    b = initial_b               # girilen ağırlıkları isimlendirdik
-    w = initial_w               # //
-    cost_history = []           # her iterasyonda hataları hesaplicaz. Bunları cost_history'de saklicaz.
+    b = initial_b               
+    w = initial_w              
+    cost_history = []          
 
     for i in range(num_iters):
-        b, w = update_weights(Y, b, w, X, learning_rate)        # 1. iterasyonda update_weight'i çağırıyoruz. Argümanları verip bu ağırlıkları güncellemesini istiyoruz.
-        mse = cost_function(Y, b, w, X)                         # cost fonksiyonunu çağırıyoruz. bir iterasyon döndük tekrardan hataya bakmasını istiyoruz. Bir gelişme olup olmadığını görmek istiyoruz.
+        b, w = update_weights(Y, b, w, X, learning_rate)       
+        mse = cost_function(Y, b, w, X)                      
         cost_history.append(mse)
 
-        # Obsiyonel bir adımdır. On binlerce iterasyon yaptığımızda her %1 raporla bölümüdür.
         if i % 100 == 0:
              ("iter={:d}    b={:.2f}    w={:.4f}    mse={:.4}".format(i, b, w, mse))
 
-    # " After {0} iterations:şu kadar iterasyon sonrasında / b = {1}, w = {2}:ağırlıkların değerleri bunlardır / mse = {3}:ortalama hatam da budur "diyerek son bir raporlama yapıyoruz.
     print("After {0} iterations b = {1}, w = {2}, mse = {3}".format(num_iters, b, w, cost_function(Y, b, w, X)))
-    return cost_history, b, w           # kullanacak olursak diye cost_history ve ağırlıkları return ediyorum.
+    return cost_history, b, w          
 
 df = pd.read_csv("C:/Users/Emre Bilir/Desktop/DSBootcamp/machine_learning/datasets/advertising.csv")
 
