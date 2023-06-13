@@ -1,5 +1,5 @@
 
-# Sales Prediction with Linear Regression
+## Sales Prediction with Linear Regression
 
 
 # I have developed a sales forecasting model. This model indicates the amount of sales obtained as a result of advertising expenses made on various channels.
